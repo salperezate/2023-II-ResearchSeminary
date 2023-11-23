@@ -15,10 +15,15 @@ swing = 90;
 % I2 = imread('pictures/alcalde/I3.png');
 % I3 = imread('pictures/alcalde/I4.png');
 
-I0 = imread('pictures/S0.png');
-I1 = imread('pictures/S1.png');
-I2 = imread('pictures/S2.png');
-I3 = imread('pictures/S3.png');
+I0 = imread('pictures/s/S0.png');
+I1 = imread('pictures/s/S1.png');
+I2 = imread('pictures/s/S2.png');
+I3 = imread('pictures/s/S3.png');
+
+% I0 = imread('pictures/Smac/SA0.png');
+% I1 = imread('pictures/Smac/SA1.png');
+% I2 = imread('pictures/Smac/SA2.png');
+% I3 = imread('pictures/Smac/SA3.png');
 
 
 
