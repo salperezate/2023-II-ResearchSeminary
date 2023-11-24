@@ -5,20 +5,20 @@ swing = 90;
 
 % Lee las imágenes (asegúrate de tener las variables I0, I1, I2, I3 definidas)
 % Ejemplo:
-% I0 = imread('pictures/c/0.png');
-% I1 = imread('pictures/c/1.png');
-% I2 = imread('pictures/c/2.png');
-% I3 = imread('pictures/c/3.png');
+I0 = imread('pictures/c/0.png');
+I1 = imread('pictures/c/1.png');
+I2 = imread('pictures/c/2.png');
+I3 = imread('pictures/c/3.png');
 
-% I0 = imread('pictures/alcalde/I1.png');
-% I1 = imread('pictures/alcalde/I2.png');
-% I2 = imread('pictures/alcalde/I3.png');
-% I3 = imread('pictures/alcalde/I4.png');
+% I0 = imread('pictures/alcalde/I0.png');
+% I1 = imread('pictures/alcalde/I1.png');
+% I2 = imread('pictures/alcalde/I2.png');
+% I3 = imread('pictures/alcalde/I3.png');
 
-I0 = imread('pictures/s/S0.png');
-I1 = imread('pictures/s/S1.png');
-I2 = imread('pictures/s/S2.png');
-I3 = imread('pictures/s/S3.png');
+% I0 = imread('pictures/s/S0.png');
+% I1 = imread('pictures/s/S1.png');
+% I2 = imread('pictures/s/S2.png');
+% I3 = imread('pictures/s/S3.png');
 
 % I0 = imread('pictures/Smac/SA0.png');
 % I1 = imread('pictures/Smac/SA1.png');
