@@ -1,4 +1,4 @@
-% Original FOUR-FRAME ALGORITH
+% Original THREE-FRAME ALGORITH
 
 %% Clear and close everything
 clear; close all; clc;
@@ -31,6 +31,7 @@ I4 = zeros(size(I0));
 % I2 = imread('pictures/ss_mac/I2.png');
 % I3 = imread('pictures/ss_mac/I3.png');
 % I4 = imread('pictures/ss_mac/I4.png');
+% Original THREE-FRAME ALGORITH
 
 % Convert to grayscale and double
 % I0 = rgb2gray(I0);
@@ -66,39 +67,25 @@ B = zeros(height, width);
 delta_d = zeros(height, width);
 phi_d = zeros(height, width);
 
-% Obtain the retardance and azimuth
+% Obtain the retardance and azimuth for each pixel
 for i = 1:height
     for j = 1:width
 
         % Calculate A, B and denominator
-        denominator = I1(i,j) + I2(i,j) - 2 * I0(i,j);
+        denominator = I1(i,j) + I2(i,j);
 
-        A(i,j) = ((I1(i,j) - I2(i,j))/denominator) * tand(chi/2);
-        B(i,j) = ((I1(i,j) + I2(i,j) - 2 * I3(i,j))/denominator) * tand(chi/2);
+        A(i,j) = (I1(i,j) - I3(i,j)) / denominator;
+        B(i,j) = (I2(i,j) - I3(i,j)) / denominator;
 
-        % Obtain the retardance
-        % when denominator is more or equal than 0
-        if denominator >= 0
-            delta(i,j) = atan(sqrt(A(i,j)^2 + B(i,j)^2));
-        % when denominator is less than 0 
-        else
-            delta(i,j) = pi - atan(sqrt(A(i,j)^2 + B(i,j)^2));
-        end
-        
-        % Obtain the azimuth
-        phi(i,j) = 0.5 * atan(A(i,j)/B(i,j));
+        % Calculate delta and phi
+        delta(i,j) = 2 * atan( (sqrt(2*(A(i,j)^2 + B(i,j)^2)) / (1 +  sqrt(1 - (2*(A(i,j)^2 + B(i,j)^2))))) * tand(chi/2) );
+
+        phi(i,j) = atan(A(i,j) / B(i,j) ) / 2 - 22.5;
+
     end
 end
 
-% Convert the retardance and azimuth to degrees
-for i = 1:height
-    for j = 1:width
-        delta_d(i,j) = delta(i,j) * 180 / pi;
-        phi_d(i,j) = phi(i,j) * 180 / pi;
-    end
-end
-
-% Show the results
+% Obtain the retardance and azimuth in degrees for each pixel
 % Use colormap, show colorbar, and set title
 figure(1);
 subplot(1,2,1);

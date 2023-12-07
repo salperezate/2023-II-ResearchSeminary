@@ -1,4 +1,4 @@
-% Original FOUR-FRAME ALGORITH
+% Original FIVE-FRAME ALGORITH
 
 %% Clear and close everything
 clear; close all; clc;
@@ -66,31 +66,31 @@ B = zeros(height, width);
 delta_d = zeros(height, width);
 phi_d = zeros(height, width);
 
-% Obtain the retardance and azimuth
+% Obtain the retardance and azimuth for each pixel
 for i = 1:height
     for j = 1:width
 
-        % Calculate A, B and denominator
-        denominator = I1(i,j) + I2(i,j) - 2 * I0(i,j);
+        % Calculate A, B
+        A(i,j) = ((I1(i,j) - I2(i,j)) / (I1(i,j) + I2(i,j) - 2*I0(i,j))) * tand(chi/2);
 
-        A(i,j) = ((I1(i,j) - I2(i,j))/denominator) * tand(chi/2);
-        B(i,j) = ((I1(i,j) + I2(i,j) - 2 * I3(i,j))/denominator) * tand(chi/2);
+        B(i,j) = ((I4(i,j) - I3(i,j)) / (I4(i,j) + I3(i,j) - 2*I0(i,j))) * tand(chi/2);
 
-        % Obtain the retardance
-        % when denominator is more or equal than 0
-        if denominator >= 0
-            delta(i,j) = atan(sqrt(A(i,j)^2 + B(i,j)^2));
-        % when denominator is less than 0 
+        d = I1(i,j) + I2(i,j) - 2*I0(i,j);
+
+        % Calculate delta
+        % when d is more or equal than 0
+        if d >= 0
+            delta(i,j) = atand(sqrt(A(i,j)^2 + B(i,j)^2));
+        % when d is less than 0
         else
-            delta(i,j) = pi - atan(sqrt(A(i,j)^2 + B(i,j)^2));
+            delta(i,j) = 180 + atand(sqrt(A(i,j)^2 + B(i,j)^2));
         end
-        
-        % Obtain the azimuth
+
+        % Calculate phi
         phi(i,j) = 0.5 * atan(A(i,j)/B(i,j));
     end
-end
 
-% Convert the retardance and azimuth to degrees
+    % Convert the retardance and azimuth to degrees
 for i = 1:height
     for j = 1:width
         delta_d(i,j) = delta(i,j) * 180 / pi;
